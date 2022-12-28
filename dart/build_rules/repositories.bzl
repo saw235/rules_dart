@@ -57,7 +57,7 @@ filegroup(
 def dart_repositories():
   sdk_channel = "beta"
   sdk_version = "2.19.0-444.2.beta"
-  linux_x64_sha = "99cc324ea0d2cc9c6a25ec5055a39769dd1161bdce4605da7935a66b5774e5eb"
+  linux_x64_sha = "9454bfc7eeab61dd7d9b13a393c0c2978ee5a71a2059c687b1b2e8e31eef6740"
   macos_arm64_sha = "a4be379202cf731c7e33de20b4abc4ca1e2e726bc5973222b3a7ae5a0cabfce1"
   macos_x64_sha = "ba258fff40822cb410c4f1f7916b63f0837903a6bae8f4bd83341053b10ecbe3"
 
