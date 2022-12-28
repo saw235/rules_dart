@@ -25,6 +25,8 @@ def _dart_vm_binary_impl(ctx):
                                data=ctx.files.data,
                                deps=ctx.attr.deps)
 
+  package_spec = ctx.file.package_spec
+
   if ctx.attr.snapshot:
     # Build snapshot
     out_snapshot = ctx.actions.declare_file(ctx.label.name + ".snapshot")
@@ -40,13 +42,6 @@ def _dart_vm_binary_impl(ctx):
   else:
     script_file = ctx.file.script_file
 
-  # Emit package spec.
-  package_spec = ctx.actions.declare_file(ctx.label.name + ".packages")
-  package_spec_action(
-      ctx=ctx,
-      dart_ctx=dart_ctx,
-      output=package_spec,
-  )
 
   # Emit entrypoint script.
   ctx.actions.expand_template(
@@ -101,6 +96,7 @@ _dart_vm_binary_attrs = {
     "_entrypoint_template": attr.label(
         allow_single_file=True,
         default=Label("//dart/build_rules/templates:dart_vm_binary")),
+    "package_spec": attr.label(allow_single_file=True, mandatory=True)
 }
 
 
