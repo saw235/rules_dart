@@ -17,6 +17,12 @@
 
 load(":internal.bzl", "assert_third_party_licenses", "make_dart_context")
 
+DartInfo = provider(
+    doc = "Contains information about a Dart library target.",
+    fields = {
+        "dart": "The Dart context containing library metadata and dependencies.",
+    },
+)
 
 def _dart_library_impl(ctx):
   """Implements the dart_library() rule."""
@@ -27,7 +33,7 @@ def _dart_library_impl(ctx):
                                data=ctx.files.data,
                                deps=ctx.attr.deps)
 
-  return struct(
+  return DartInfo(
       dart=dart_ctx,
   )
 
