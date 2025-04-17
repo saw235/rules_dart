@@ -21,7 +21,7 @@ filegroup(
       "dart-sdk/bin/dart",
       "dart-sdk/bin/snapshots/dart2js.dart.snapshot",
       "dart-sdk/lib/**",
-  ]),
+  ], allow_empty=True),
 )
 
 filegroup(
@@ -35,7 +35,7 @@ filegroup(
       "dart-sdk/version",
       "dart-sdk/bin/dart",
       "dart-sdk/bin/snapshots/pub.dart.snapshot",
-  ]),
+  ], allow_empty=True),
 )
 """
 
