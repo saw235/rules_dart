@@ -7,17 +7,6 @@ module(
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
 bazel_dep(name = "platforms", version = "0.0.8")
 
-ext_module = use_extension("//dart/build_rules:extensions.bzl", "dart_repositories_extension")
-# Configure Dart SDK version
-ext_module.configure(
-    sdk_version = "3.3.1",  # Example: Use Dart 3.3.1
-    sdk_channel = "stable",  # Optional: defaults to "stable"
-    # Optional: Specify SHA256 hashes for verification
-    linux_x64_sha = "e87f4e6a2dd8a0f1d1c3d3a2b27b8f083ae5f1cd6c6b3d079a9b5d9ca8b5a5d",
-    macos_arm64_sha = "b517fdb8db193f0051b837d3a5ee54d5b3d9a098c0c16d8fa205fa747b1112ee",
-    macos_x64_sha = "b517fdb8db193f0051b837d3a5ee54d5b3d9a098c0c16d8fa205fa747b1112ee",
-)
-
 use_repo(ext_module, 
     "dart_linux_x86_64",
     "dart_darwin_arm64", 
