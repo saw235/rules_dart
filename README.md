@@ -17,8 +17,13 @@ with [Bazel](https://bazel.build).
 Setup
 -----
 
-To use the Dart rules, add the following to your `WORKSPACE` file to add the
-external repositories for the Dart toolchain:
+To use the Dart rules with Bazel 8+, add the following to your `MODULE.bazel` file:
+
+```python
+bazel_dep(name = "io_bazel_rules_dart", version = "2.17.7")
+```
+
+For older versions of Bazel (pre-8.0), add the following to your `WORKSPACE` file:
 
 ```python
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")

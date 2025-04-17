@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BAZEL_VERSION=4.0.0
+BAZEL_VERSION=8.0.0
 
 linux_install() {
   echo "============================================================"

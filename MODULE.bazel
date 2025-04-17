@@ -1,0 +1,15 @@
+module(
+    name = "io_bazel_rules_dart",
+    version = "2.17.7",
+    compatibility_level = 1,
+)
+
+bazel_dep(name = "bazel_skylib", version = "1.5.0")
+bazel_dep(name = "platforms", version = "0.0.8")
+
+ext_module = use_extension("//dart/build_rules:extensions.bzl", "dart_repositories_extension")
+use_repo(ext_module, 
+    "dart_linux_x86_64",
+    "dart_darwin_arm64", 
+    "dart_darwin_x86_64"
+) 
