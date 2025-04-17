@@ -6,9 +6,3 @@ module(
 
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
 bazel_dep(name = "platforms", version = "0.0.8")
-
-use_repo(ext_module, 
-    "dart_linux_x86_64",
-    "dart_darwin_arm64", 
-    "dart_darwin_x86_64"
-) 
