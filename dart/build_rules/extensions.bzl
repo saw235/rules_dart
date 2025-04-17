@@ -72,7 +72,8 @@ def _dart_repositories_extension_impl(module_ctx):
         build_file_content = _DART_SDK_BUILD_FILE,
     )
 
-    return []
+    # Return None instead of an empty list
+    return None
 
 dart_repositories_extension = module_extension(
     implementation = _dart_repositories_extension_impl,
