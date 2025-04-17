@@ -40,12 +40,23 @@ filegroup(
 """
 
 def _dart_repositories_extension_impl(module_ctx):
-    # Default values for Dart SDK
-    sdk_channel = "stable"
-    sdk_version = "2.17.7"
-    linux_x64_sha = "ba8bc85883e38709351f78c527cbf72e22cd234b3678a1ec6a2e781f7984e624"
-    macos_arm64_sha = "a4be379202cf731c7e33de20b4abc4ca1e2e726bc5973222b3a7ae5a0cabfce1"
-    macos_x64_sha = "ba258fff40822cb410c4f1f7916b63f0837903a6bae8f4bd83341053b10ecbe3"
+    registrations = {}
+    for mod in module_ctx.modules:
+        for config in mod.tags.configure:
+            registrations.update({
+                "sdk_channel": config.sdk_channel,
+                "sdk_version": config.sdk_version,
+                "linux_x64_sha": config.linux_x64_sha,
+                "macos_arm64_sha": config.macos_arm64_sha,
+                "macos_x64_sha": config.macos_x64_sha,
+            })
+
+    # Use provided values or defaults
+    sdk_channel = registrations.get("sdk_channel", "stable")
+    sdk_version = registrations.get("sdk_version", "2.17.7")
+    linux_x64_sha = registrations.get("linux_x64_sha", "ba8bc85883e38709351f78c527cbf72e22cd234b3678a1ec6a2e781f7984e624")
+    macos_arm64_sha = registrations.get("macos_arm64_sha", "a4be379202cf731c7e33de20b4abc4ca1e2e726bc5973222b3a7ae5a0cabfce1")
+    macos_x64_sha = registrations.get("macos_x64_sha", "ba258fff40822cb410c4f1f7916b63f0837903a6bae8f4bd83341053b10ecbe3")
 
     sdk_base_url = ("https://storage.googleapis.com/dart-archive/channels/" +
         sdk_channel + "/release/" +
@@ -72,9 +83,19 @@ def _dart_repositories_extension_impl(module_ctx):
         build_file_content = _DART_SDK_BUILD_FILE,
     )
 
-    # Return None instead of an empty list
     return None
+
+configure = tag_class(
+    attrs = {
+        "sdk_channel": attr.string(default = "stable"),
+        "sdk_version": attr.string(default = "2.17.7"),
+        "linux_x64_sha": attr.string(),
+        "macos_arm64_sha": attr.string(),
+        "macos_x64_sha": attr.string(),
+    },
+)
 
 dart_repositories_extension = module_extension(
     implementation = _dart_repositories_extension_impl,
+    tag_classes = {"configure": configure},
 ) 
